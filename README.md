@@ -125,7 +125,7 @@ The previous figure, translated to SDN topology, looks like this:
 
 And finally, the user will see all consoles of each virtual machine:
 
-[Foto todas las maquinas virtuales]
+![virtual_machines](https://raw.githubusercontent.com/cletomcj/vnx-sdn/master/hub_test/consoles.png)
 
 Now it's time to log into "sdnctrl" virtual machine and init the Floodlight controller executing:
 ~~~

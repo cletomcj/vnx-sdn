@@ -127,6 +127,13 @@ And finally, the user will see all consoles of each virtual machine:
 
 [Foto todas las maquinas virtuales]
 
+Now it's time to log into "sdnctrl" virtual machine and init the Floodlight controller executing:
+~~~
+java -jar /floodlight/target/floodlight.jar -cf /floodlight/floodlight.properties &
+~~~
+
+Users can now execute ping between hosts and see OpenFlow packets with Wireshark in "sdnctrl-e1" interface for example.
+
 Finally you can stop de environment with "vnx -f <XML file> -v --destroy".
 
 ###IMPORTANT
