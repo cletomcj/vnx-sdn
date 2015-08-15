@@ -117,38 +117,61 @@ Once you have installed VNX you will have into /usr/share/vnx/examples directory
 
 Now, you are ready to execute the environments with "vnx -f <XML file> -v --create" command. For example if you execute the "escenario_hub_sdn.xml" environment, the topology created in host machines is shown below:
 
-[Foto del escenario Hub]
+![Hub](https://raw.githubusercontent.com/cletomcj/vnx-sdn/master/hub_test/Esquema_escenario_1.png)
 
 The previous figure, translated to SDN topology, looks like this:
 
-[Foto escenario Hub simplificado]
+![simple_Hub](https://raw.githubusercontent.com/cletomcj/vnx-sdn/master/hub_test/esquema_simple_esc1.png)
 
 And finally, the user will see all consoles of each virtual machine:
 
 [Foto todas las maquinas virtuales]
 
+Now it's time to log into "sdnctrl" virtual machine and init the Floodlight controller executing:
+~~~
+java -jar /floodlight/target/floodlight.jar -cf /floodlight/floodlight.properties &
+~~~
+
+Users can now execute ping between hosts and see OpenFlow packets with Wireshark in "sdnctrl-e1" interface for example.
+
 Finally you can stop de environment with "vnx -f <XML file> -v --destroy".
 
 ###IMPORTANT
 * NOTE 1: It's necessary to execute the "dbinit.sh" script every time the host machine is restarted, before start any environment
+
 * NOTE 2: You must read the documentation for each SDN environment before execute it. Documentation of each environment is placed in each of the sub-directories "/usr/share/vnx/examples/metersmodule/", "/usr/share/vnx/examples/noarpspoof/", etc.
 
 ###Some useful commands
 You can start practicing with the "escenario_hub_sdn.xml" environment to get introduced to VNX, Floodligh and Open vSwitch to understand the behaviour of the SDN architecture. This environment load the "Hub" module of Floodlight and this module installs flow entries into switches in order to get they working as simple hubs.
 
-You can practice sniffing packets with Wireshark in the sdnctrl-e1 interface to see OpenFlow packets. And also you can use these Open vSwitch commands to look over the switch's internal configuration (like Flow Tables, Flow entries, datpath-id, etc).
+You can practice sniffing packets with Wireshark in the sdnctrl-e1 interface to see OpenFlow packets. And also you can use these Open vSwitch commands to look over the switch's internal configuration (like Flow Tables, Flow entries, datpath-id, etc):
 
-* ovs-vsctl list-br -> List all switches
-* ovs-ofctl -O OpenFlow13 dump-flows [switch_name] -> show Flow Tables configuration
+List all switches
+~~~
+* ovs-vsctl List all switches
+~~~
+Show Flow Tables configuration
+~~~
+* ovs-ofctl -O OpenFlow13 dump-flows [switch_name]
+~~~
 
 And some Floodligh REST commands:
 
-* curl http://10.1.4.2:8080/wm/core/controller/switches/json -> List all the switches currently discovered by controller
-* curl http://10.1.4.2:8080/wm/topology/links/json -> List all links between switches currently discovered by controller
-* curl http://10.1.4.2:8080/wm/device/ -> List all devices connected to the OpenFlow network currently discovered by controller
+List all switches discovered by controller
+~~~
+* curl http://10.1.4.2:8080/wm/core/controller/switches/json
+~~~
+List all links between switches discovered by controller
+~~~
+* curl http://10.1.4.2:8080/wm/topology/links/json
+~~~
+List all devices connected to OF network currently discovered by controller
+~~~
+* curl http://10.1.4.2:8080/wm/device/
+~~~
 
 ##Author
-This project has been developed by Carlos Martin-Cleto Jimenez as a result of the Master's Thesis entitled "Development of virtual scenarios to study the architecture and functionality of Software Defined Networks" in collaboration with Telematics Engineering Department (DIT) of the Technical University of Madrid (UPM).
+This project has been developed by **Carlos Martin-Cleto Jimenez** as a result of the Master's Thesis entitled "Development of virtual scenarios to study the architecture and functionality of Software Defined Networks" in collaboration with Telematics Engineering Department (DIT) of the Technical University of Madrid (UPM).
 
 
 
